@@ -4,4 +4,7 @@ const router = express.Router();
 
 router.post("/",createShortUrl);
 
+// flow of short url creation : controller (createShortUrl) -> 
+// service (createShortUrlWithUser || createShortUrlWithoutUser) -> model (createShortUrl)
+
 export default router;

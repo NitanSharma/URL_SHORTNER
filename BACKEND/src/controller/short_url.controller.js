@@ -1,6 +1,7 @@
-import { getShortUrl } from "../dao/short_url.js"
+// import { getShortUrl } from "../dao/short_url.js"
 import { createShortUrlWithoutUser, createShortUrlWithUser } from "../services/short_url.service.js"
 import wrapAsync from "../utils/tryCatchWrapper.js"
+import urlSchema from "../models/short_url.model.js";
 
 export const createShortUrl = wrapAsync(async (req,res)=>{
     const data = req.body
@@ -16,7 +17,10 @@ export const createShortUrl = wrapAsync(async (req,res)=>{
 
 export const redirectFromShortUrl = wrapAsync(async (req,res)=>{
     const {id} = req.params
-    const url = await getShortUrl(id)
+    // console.log(id);
+    // const url = await getShortUrl(id); 
+    const url = await urlSchema.findOneAndUpdate({short_url:id},{$inc:{clicks:1}});
+    // console.log(url)
     if(!url) throw new Error("Short URL not found")
     res.redirect(url.full_url)
 })

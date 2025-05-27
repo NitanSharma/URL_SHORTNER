@@ -1,5 +1,5 @@
 import express from "express";
-import {nanoid} from "nanoid"
+import {nanoid} from "nanoid"// package to generate random id
 import dotenv from "dotenv"
 import connectDB from "./src/config/monogo.config.js"
 import short_url from "./src/routes/short_url.route.js"
@@ -13,25 +13,25 @@ import cookieParser from "cookie-parser"
 
 dotenv.config("./.env")
 
-const app = express();
+const app = express();// start express
 
 app.use(cors({
     origin: 'http://localhost:5173', // your React app
     credentials: true // 👈 this allows cookies to be sent
-}));
+}));// this is to allow cross origin requests 
 
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(cookieParser())
+app.use(express.json())// this is to parse json data
+app.use(express.urlencoded({extended:true}))// this is to parse url encoded data
+app.use(cookieParser())// this is to parse cookies
 
-app.use(attachUser)
+app.use(attachUser)// this is to attach user to req object
 
-app.use("/api/user",user_routes)
-app.use("/api/auth",auth_routes)
-app.use("/api/create",short_url)
+app.use("/api/user",user_routes) // user routes
+app.use("/api/auth",auth_routes)// auth routes
+app.use("/api/create",short_url)// short url routes
 app.get("/:id",redirectFromShortUrl)
 
-app.use(errorHandler)
+app.use(errorHandler) // error handler
 
 app.listen(3000,()=>{
     connectDB()
