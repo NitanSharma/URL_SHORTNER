@@ -11,6 +11,7 @@ const LoginForm = ({ state }) => {
     const [error, setError] = useState('');
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    // useSelector part of redux
     const auth = useSelector((state) => state.auth)
     console.log(auth)
 
