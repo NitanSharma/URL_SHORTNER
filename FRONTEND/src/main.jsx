@@ -1,12 +1,13 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'// TanStack Query
+import { RouterProvider, createRouter } from '@tanstack/react-router'// TanStack routing
 import { routeTree } from './routing/routeTree.js'
 import store from './store/store.js'
 import { Provider } from 'react-redux'
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient();
+
 const router = createRouter({
   routeTree,
   context:{
